@@ -2,13 +2,11 @@ package file;
 
 import java.io.File;
 
-public class CustomFile extends File{
+public class CustomFile{
 
+    private String path;
+    private String name;
     private String content;
-
-    public CustomFile(String pathname) {
-        super(pathname);
-    }
 
     public String getContent() {
         return content;
@@ -18,15 +16,19 @@ public class CustomFile extends File{
         this.content += content;
     }
 
-    @Override
-    public String getAbsolutePath() {
-        return super.getAbsolutePath();
+    public String getPath() {
+        return path;
     }
 
-    @Override
-    public String toString() {
-        return "CustomFile{" +
-                "content=" + content +
-                '}';
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

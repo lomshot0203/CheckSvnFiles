@@ -1,16 +1,13 @@
 import file.CustomFile;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Properties;
+import java.util.*;
 
 public class CheckSvnFiles {
 
-    private static ArrayList<CustomFile> list;
+    private static ArrayList<String> list;
 
-    public static ArrayList<CustomFile> getList() {
+    public static ArrayList<String> getList() {
         return list;
     }
 
@@ -41,54 +38,39 @@ public class CheckSvnFiles {
     }
 
     /**변경대상 파일 리스트 가져오기*/
-    public static ArrayList<CustomFile> getTargetFiles (ArrayList<CustomFile> changedFileList, String path, String[] ignores) {
+    public static ArrayList<String> getTargetFiles (ArrayList<String> changedFileList, String path, String[] ignores) {
         list = new ArrayList<>();
-        ArrayList<File> files = new ArrayList<>();
         File file = new File(path);
         getFileList(file);
-        return getList();
+        for (int idx=0; idx < changedFileList.size(); idx++) {
+            if ( list.contains(changedFileList.get(idx)) ) {
+                list.;
+            }
+        }
+        return ;
     }
 
 
-    /**변경대상 파일 리스트를 반환한다.*/
+    /**파일 리스트를 반환한다.*/
     private static void getFileList(File file) {
         for (File item : file.listFiles()) {
             if (item.isDirectory()) {
                 getFileList(item);
             }
             if (item != null && item.isFile() && item.canRead()) {
-                CustomFile cf = new CustomFile(item.getAbsolutePath());
-                list.add(cf);
+                list.add(item.getAbsolutePath());
             }
         }
     }
 
     /**파일 내용을 읽어온다*/
     public static void getFileContent () {
-        for(CustomFile file : list) {
-            try (BufferedReader br = new BufferedReader(new FileReader(file))){
-                String line = "";
-                while ((line = br.readLine()) != null) {
-                    file.setContent(line);
-//                    System.out.println(line);
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
 
     /** 파일 내용을 비교한다.*/
     public static ArrayList<CustomFile> compareCustomFiles (ArrayList<CustomFile> changedList, ArrayList<CustomFile> targetList) {
-        for(CustomFile targetFile : targetList) {
-            for (CustomFile changedFile : changedList) {
-                if (targetFile.getAbsolutePath().equals(changedFile.getAbsolutePath())) {
-                }
-            }
-        }
         return null;
     }
 
