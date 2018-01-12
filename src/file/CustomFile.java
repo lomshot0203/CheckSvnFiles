@@ -18,6 +18,10 @@ public class CustomFile extends File{
         this.content += content;
     }
 
+    @Override
+    public String getAbsolutePath() {
+        return super.getAbsolutePath();
+    }
 
     @Override
     public String toString() {

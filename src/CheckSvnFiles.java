@@ -34,21 +34,31 @@ public class CheckSvnFiles {
     }
 
         /**변경된 파일 리스트 가져오기*/
-    public static void getChangedFiles (String dir) {
+    public static void getChangedFiles (String path) {
         list = new ArrayList<>();
-        File file = new File(dir);
+        File file = new File(path);
         getFileList(file);
     }
 
+    /**변경대상 파일 리스트 가져오기*/
+    public static ArrayList<CustomFile> getTargetFiles (ArrayList<CustomFile> changedFileList, String path, String[] ignores) {
+        list = new ArrayList<>();
+        ArrayList<File> files = new ArrayList<>();
+        File file = new File(path);
+        getFileList(file);
+        return getList();
+    }
 
-    /**파일 리스트를 반환한다.*/
+
+    /**변경대상 파일 리스트를 반환한다.*/
     private static void getFileList(File file) {
         for (File item : file.listFiles()) {
             if (item.isDirectory()) {
                 getFileList(item);
             }
             if (item != null && item.isFile() && item.canRead()) {
-                list.add(new CustomFile(item.getAbsolutePath()));
+                CustomFile cf = new CustomFile(item.getAbsolutePath());
+                list.add(cf);
             }
         }
     }
