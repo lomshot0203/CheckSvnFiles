@@ -40,14 +40,18 @@ public class CheckSvnFiles {
     /**변경대상 파일 리스트 가져오기*/
     public static ArrayList<String> getTargetFiles (ArrayList<String> changedFileList, String path, String[] ignores) {
         list = new ArrayList<>();
+        ArrayList<String> rtnList = new ArrayList<>();
         File file = new File(path);
         getFileList(file);
         for (int idx=0; idx < changedFileList.size(); idx++) {
-            if ( list.contains(changedFileList.get(idx)) ) {
-                list.;
+            for (int j=0; j < list.size(); j++) {
+                if (changedFileList.get(idx).equals(list.get(j))) {
+                    rtnList.add(list.get(j));
+                    continue;
+                }
             }
         }
-        return ;
+        return rtnList;
     }
 
 
