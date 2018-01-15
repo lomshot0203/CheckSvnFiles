@@ -1,34 +1,46 @@
 package file;
 
 import java.io.File;
+import java.util.ArrayList;
 
-public class CustomFile{
+public class CustomFile extends File{
 
-    private String path;
     private String name;
-    private String content;
+    private String path;
+    private ArrayList<byte[]> content;
+    private String chgYn;
 
-    public String getContent() {
-        return content;
+    public CustomFile (String path) {
+        super(path);
+        content = new ArrayList<>();
     }
 
-    public void setContent(String content) {
-        this.content += content;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
+    @Override
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getChgYn() {
+        return chgYn;
+    }
+
+    public void setChgYn(String chgYn) {
+        this.chgYn = chgYn;
+    }
+
+    public ArrayList<byte[]> getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content.add(content);
     }
 }
